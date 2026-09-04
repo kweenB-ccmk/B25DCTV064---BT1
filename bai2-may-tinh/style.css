@@ -1,0 +1,203 @@
+/* =========================================================
+   TOKENS — bảng màu lấy cảm hứng từ màn hình LCD màu hổ phách
+   của các máy tính bỏ túi cổ điển
+   ========================================================= */
+:root {
+  --page-bg: #E9EAE6;
+
+  --case-bg: #232326;
+  --case-shadow: rgba(20, 20, 18, 0.45);
+
+  --display-bg: #14140F;
+  --display-text: #FF9E45;
+  --display-text-dim: rgba(255, 158, 69, 0.55);
+  --display-error: #FF6B5C;
+
+  --key-number-bg: #38383C;
+  --key-number-text: #F2F1ED;
+
+  --key-function-bg: #4B4B50;
+  --key-function-text: #F2F1ED;
+
+  --key-operator-bg: #3A2E22;
+  --key-operator-text: #FF9E45;
+
+  --key-equals-bg: #FF9E45;
+  --key-equals-shadow: #C97632;
+  --key-equals-text: #201202;
+
+  --radius-case: 28px;
+  --radius-key: 14px;
+
+  --font-display: 'Share Tech Mono', monospace;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --transition: 100ms ease;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-bg);
+  font-family: var(--font-ui);
+  padding: 24px;
+}
+
+/* =========================================================
+   THÂN MÁY TÍNH
+   ========================================================= */
+.calculator {
+  width: min(360px, 100%);
+  background: var(--case-bg);
+  border-radius: var(--radius-case);
+  padding: 22px;
+  box-shadow:
+    0 30px 60px -20px var(--case-shadow),
+    0 10px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================================
+   MÀN HÌNH HIỂN THỊ (kiểu LCD)
+   ========================================================= */
+.display {
+  background: var(--display-bg);
+  border-radius: calc(var(--radius-key) + 2px);
+  padding: 20px 20px 16px;
+  margin-bottom: 20px;
+  text-align: right;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.display-expression {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--display-text-dim);
+  min-height: 1.3em;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.display-expression::-webkit-scrollbar { display: none; }
+
+.display-result {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--display-text);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow-x: auto;
+  text-shadow: 0 0 14px rgba(255, 158, 69, 0.35);
+  transition: font-size var(--transition);
+  scrollbar-width: none;
+}
+.display-result::-webkit-scrollbar { display: none; }
+
+/* Số quá dài -> tự thu nhỏ để không tràn màn hình */
+.display-result.long { font-size: 1.9rem; }
+
+/* Trạng thái lỗi (vd chia cho 0) */
+.display-result.error {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  color: var(--display-error);
+  text-shadow: none;
+}
+
+/* =========================================================
+   LƯỚI NÚT BẤM
+   ========================================================= */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.key-blank { visibility: hidden; }
+
+.key {
+  border: none;
+  border-radius: var(--radius-key);
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 16px 0;
+  cursor: pointer;
+  color: var(--key-number-text);
+  box-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.35),
+    0 6px 10px rgba(0, 0, 0, 0.22);
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+}
+
+.key:hover { filter: brightness(1.12); }
+
+.key:active,
+.key.is-pressed {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.key-number { background: var(--key-number-bg); color: var(--key-number-text); }
+
+.key-function {
+  background: var(--key-function-bg);
+  color: var(--key-function-text);
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+}
+
+.key-operator {
+  grid-column: 4;
+  background: var(--key-operator-bg);
+  color: var(--key-operator-text);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.key-zero {
+  grid-column: span 3;
+  text-align: left;
+  padding-left: 26px;
+}
+
+.key-equals {
+  grid-column: 1 / -1;
+  background: var(--key-equals-bg);
+  color: var(--key-equals-text);
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 18px 0;
+  box-shadow:
+    0 4px 0 var(--key-equals-shadow),
+    0 10px 16px rgba(255, 158, 69, 0.3);
+}
+
+.key-equals:active,
+.key-equals.is-pressed {
+  box-shadow: 0 1px 0 var(--key-equals-shadow), 0 3px 6px rgba(255, 158, 69, 0.25);
+}
+
+/* Trạng thái focus rõ ràng khi dùng bàn phím Tab */
+.key:focus-visible {
+  outline: 2px solid var(--display-text);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   RESPONSIVE — MÀN HÌNH NHỎ
+   ========================================================= */
+@media (max-width: 380px) {
+  .calculator { padding: 16px; }
+  .display-result { font-size: 2.2rem; }
+  .display-result.long { font-size: 1.6rem; }
+  .key { font-size: 1rem; padding: 14px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Máy tính bỏ túi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="calculator" aria-label="Máy tính bỏ túi">
+
+    <!-- MÀN HÌNH HIỂN THỊ -->
+    <section class="display">
+      <div class="display-expression" id="expression" aria-hidden="true"></div>
+      <div class="display-result" id="result" aria-live="polite">0</div>
+    </section>
+
+    <!-- LƯỚI CÁC NÚT BẤM -->
+    <section class="keypad" id="keypad">
+
+      <!-- Hàng 1: xóa toàn bộ, xóa 1 ký tự, chia -->
+      <button class="key key-function" data-action="clear">C</button>
+      <button class="key key-function" data-action="delete">DEL</button>
+      <span class="key-blank" aria-hidden="true"></span>
+      <button class="key key-operator" data-action="operator" data-value="/">÷</button>
+
+      <!-- Hàng 2 -->
+      <button class="key key-number" data-action="number" data-value="7">7</button>
+      <button class="key key-number" data-action="number" data-value="8">8</button>
+      <button class="key key-number" data-action="number" data-value="9">9</button>
+      <button class="key key-operator" data-action="operator" data-value="*">×</button>
+
+      <!-- Hàng 3 -->
+      <button class="key key-number" data-action="number" data-value="4">4</button>
+      <button class="key key-number" data-action="number" data-value="5">5</button>
+      <button class="key key-number" data-action="number" data-value="6">6</button>
+      <button class="key key-operator" data-action="operator" data-value="-">−</button>
+
+      <!-- Hàng 4 -->
+      <button class="key key-number" data-action="number" data-value="1">1</button>
+      <button class="key key-number" data-action="number" data-value="2">2</button>
+      <button class="key key-number" data-action="number" data-value="3">3</button>
+      <button class="key key-operator" data-action="operator" data-value="+">+</button>
+
+      <!-- Hàng 5: số 0, dấu thập phân -->
+      <button class="key key-number key-zero" data-action="number" data-value="0">0</button>
+      <button class="key key-number" data-action="decimal">.</button>
+
+      <!-- Hàng 6: nút bằng, chiếm trọn chiều ngang -->
+      <button class="key key-equals" data-action="equals">=</button>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
